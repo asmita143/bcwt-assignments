@@ -1,31 +1,13 @@
 'use strict';
 const express = require('express');
 const app = express();
+const catRouter=require('./routes/catRoute')
+const userRouter=require('./routes/userRoute')
 const port = 3000;
 
-app.get('/cat', (req, res) => {
-  res.send('From this endpoint you can get cats.')
-});
 
-app.get('/cat/:catId', (req, res) => {
-  console.log(req.params)
-  res.send('This one is for cat id!!.')
-});
-
-app.post('/cat', (req, res) => {
-  res.send('This one is for adding more cats!!.')
-});
-
-app.put('/cat', (req, res) => {
-  res.send('This one is for the editing cats.')
-});
-app.delete('/cat', (req, res) => {
-  res.send('This one is for deleting cats!!.')
-});
-
-// app.get('/cat', (req, res) => {
-// res.send('From this endpoint you can get cats.')
-// });
+app.use('/cat',catRouter)
+app.use('/user',userRouter);
 
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
