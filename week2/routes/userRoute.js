@@ -7,9 +7,7 @@ router.get('/', userController.getUsers);
 
 router.get('/:userId', userController.getUser);
 
-router.post('/', (req, res) => {
-    res.send('This one is for adding more users!!.')
-  });
+router.post('/', userController.createUser);
   
   router.put('/', (req, res) => {
     res.send('This one is for the editing users.')

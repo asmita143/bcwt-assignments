@@ -20,10 +20,12 @@ const getUser=(req,res)=>{
     }else{
         res.sendStatus(404);
     }
-    res.json(user)
 };
 const modifyUser=(req,res)=>{};
-const createUser=(req,res)=>{};
+const createUser=(req,res)=>{
+    const userInfo=`username: ${req.body.name},email:${(req.body.email)}`
+    res.send('Adding new user' +userInfo);
+};
 const deleteUser=(req,res)=>{};
 module.exports={
     getUsers,

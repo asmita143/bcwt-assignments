@@ -14,7 +14,6 @@ const getCat=(req,res)=>{
     }else{
         res.sendStatus(404);
     }
-    res.json(cat)
 };
 const modifyCat=(req,res)=>{};
 const createCat=(req,res)=>{};
