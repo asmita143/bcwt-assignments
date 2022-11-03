@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"name": "bcwt-assignments",
+			"path": "../.."
+		}
+	],
+	"settings": {
+		"liveServer.settings.port": 5501
+	}
+}
