@@ -18,7 +18,7 @@ const getCat=async(req,res)=>{
 };
 const modifyCat=(req,res)=>{};
 const createCat=async(req,res)=>{
-    console.log(req.body);
+    const addCat = await catModel.createCat(res,req);
     res.send('adding a cat')
 };
 const deleteCat=(req,res)=>{};

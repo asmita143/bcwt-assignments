@@ -22,12 +22,12 @@ const getUser = async (res,userId) => {
     console.error("error", e.message);
   }
 };
-const createUser = async (req,res) => {
+const createUser = async (res,req) => {
   try {
-    const[rows]= await promisePool.query("INSERT INTO wop_user values(?,?,?)", [ req.body.name, req.body.email, req.body.passwd]  );
+    const[rows]= await promisePool.query("INSERT INTO wop_user(name,email,password) VALUE (?,?,?)", [ req.body.name, req.body.email, req.body.passwd]  );
     return rows[0];
-  } catch (error) {
-    //res.status(500).send('error',e.message)
+  } catch (e) {
+    res.status(501).send(e.message)
     //console.error("error", e.message);
   }
 };
@@ -35,5 +35,5 @@ const createUser = async (req,res) => {
 module.exports = {
   getUser,
   getUsers,
-  createUser
+  createUser,
 };
