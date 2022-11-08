@@ -4,7 +4,7 @@ const userModel=require('../models/userModel');
 
 const getUsers=async (req,res)=>{
     //remove the password property from all user items in the array
-    const users=await userModel.users;
+    const users=await userModel.getUsers;
     users.map(user=>{
         delete user.password;
         return user;
@@ -12,10 +12,9 @@ const getUsers=async (req,res)=>{
     res.json(users)
 }
 
-const getUser=async (res,userId)=>{
+const getUser=async (req,res)=>{
     //choose only one object with matching  id
-    const users=await userModel.users;
-    const user =users.filter(user=> req.params.userId==user.id)[0];
+    const user=await userModel.getUser(res, req.params.userId)
     if(user){
        // delete user.password;
         res.json(user);
@@ -24,9 +23,11 @@ const getUser=async (res,userId)=>{
     }
 };
 const modifyUser=(req,res)=>{};
-const createUser=async(req,res)=>{
+const createUser=async (req,res)=>{
+    const userAdd=await userModel.createUser(res,req);
     const userInfo=` username: ${req.body.name},email:${(req.body.email)}`
     res.send('Adding new user' +userInfo);
+    console.log(req.body);
 };
 const deleteUser=(req,res)=>{};
 module.exports={
