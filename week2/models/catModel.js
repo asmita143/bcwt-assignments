@@ -27,5 +27,6 @@ const getCatById = async (res,catId) => {
 
 module.exports = {
   getAllCats,
-  getCatById
+  getCatById,
+  
 };

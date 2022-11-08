@@ -17,7 +17,7 @@ const getCat=async(req,res)=>{
     }
 };
 const modifyCat=(req,res)=>{};
-const createCat=(req,res)=>{
+const createCat=async(req,res)=>{
     console.log(req.body);
     res.send('adding a cat')
 };
