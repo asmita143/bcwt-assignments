@@ -6,15 +6,11 @@ const multer=require('multer');
 const catController = require('../controllers/catController');
 const upload = multer({dest:'uploads/'})
 
-  router.get('/', catController.getCats);
-  
-  router.get('/:catId', catController.getCat);
-  
-  router.post('/', upload.single('cat'), catController.createCat);;
-  
-  router.put('/', (req, res) => {
-    res.send('This one is for the editing cats.')
-  });
-  router.delete('/:catId', catController.deleteCat) 
+  router.get('/', catController.getCats)
+  .get('/:catId', catController.getCat)
+  .post('/', upload.single('cat'), catController.createCat)
+  .put('/:catId',catController.modifyCat)
+  .put('/',catController.modifyCat)
+  .delete('/:catId', catController.deleteCat) 
 
   module.exports=router;
