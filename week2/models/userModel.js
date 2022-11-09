@@ -5,35 +5,48 @@ const promisePool = pool.promise();
 const getUsers = async (res) => {
   try {
     // TODO: do the LEFT (or INNER) JOIN to get owner's name as ownername (from wop_user table).
-    const [rows] = await promisePool.query("SELECT user_id,name,email,role FROM wop_user");
+    const [rows] = await promisePool.query("SELECT * FROM wop_user");
+    console.log(rows);
     return rows;
   } catch (e) {
     res.status(500).send('error',e.message)
     console.error("error", e.message);
   }
 };
-const getUser = async (res,userId) => {
+const getUserById = async (id,res) => {
   try {
     // TODO: do the LEFT (or INNER) JOIN to get owner's name as ownername (from wop_user table).
-    const [rows] = await promisePool.query("SELECT * FROM wop_user where user_id= ?",[userId]);
+    const [rows] = await promisePool.query("SELECT user_id, name, email, role FROM wop_user where user_id= ?",[id]);
     return rows[0];
   } catch (e) {
-    //res.status(500).send('error',e.message);
+    res.status(500).send(e.message);
     console.error("error", e.message);
   }
 };
-const createUser = async (res,req) => {
+const addUser = async (res,user) => {
   try {
-    const[rows]= await promisePool.query("INSERT INTO wop_user(name,email,password) VALUE (?,?,?)", [ req.body.name, req.body.email, req.body.passwd]  );
-    return rows[0];
+    const values=[ user.body.name, user.body.email, user.body.passwd];
+    console.log(values);
+    const[result]= await promisePool.query("INSERT INTO wop_user(name,email,password) VALUE ( ?, ?, ?)", values );
+    return result;
   } catch (e) {
     res.status(501).send(e.message)
-    //console.error("error", e.message);
+    console.error("error", e.message);
   }
 };
+const deleteUser =async (id,res)=>{
+  try {
+    const[rows]= await promisePool.query("DELETE FROM wop_user where user_id=?",[id]);
+    return rows [0];
+  } catch (e) {
+    res.status(501).send(e.message)
+    console.error("error", e.message);
+  }
+}
 
 module.exports = {
-  getUser,
+  getUserById,
   getUsers,
-  createUser,
+  addUser,
+  deleteUser,
 };

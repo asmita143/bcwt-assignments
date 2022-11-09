@@ -1,4 +1,5 @@
 'use strict';
+const {rawListeners}=require('../database/db')
 const catModel=require('../models/catModel')
 
 
@@ -17,11 +18,22 @@ const getCat=async(req,res)=>{
     }
 };
 const modifyCat=(req,res)=>{};
+
 const createCat=async(req,res)=>{
-    const addCat = await catModel.createCat(res,req);
-    res.send('adding a cat')
+    const cat=req.body;
+    cat.filename=req.file.filename;
+    const catId = await catModel.addCat(cat,res);
+    res.json(catId);
 };
-const deleteCat=(req,res)=>{};
+const deleteCat= async(req,res)=>{
+    const result= await catModel.deleteCatById (req.params.catId,res);
+    if(deleteCat){
+        res.json(deleteCat)
+        console.log(" Cat delete sucessful")
+    }else{
+        res.sendStatus(404);
+    }
+};
 
 module.exports = {
     getCat,

@@ -22,17 +22,28 @@ const getCatById = async (res,catId) => {
     console.error("error", e.message);
   }
 };
-const createCat= async (res,req)=>{
+const addCat= async (cat,res)=>{
   try{
-    const [rows] = await promisePool.query("INSERT INTO wop_cat(name,weight,owner,filename,birthdate) VALUE (?,?,?,?,?)",[req.body.name, req.body.weight, req.body.owner, req.file.path, req.body.birthdate]);
-    return rows[0];
+    const values=[cat.name, cat.weight, cat.owner, cat.filename, cat.birthdate];
+    const [result] = await promisePool.query("INSERT INTO wop_cat VALUE (null,?,?,?,?,?)",values);
+    return result.insertId;
   }catch(e){
-    res.status(501).send(e.message);
+    res.status(500).send(e.message);
   }
 };
+const deleteCatById= async (catId,res)=>{
+  try {
+    const[rows]= await promisePool.query("DELETE from wop_cat where cat_id=?",[catId]);
+    return rows[0];
+  } catch (e) {
+    res.status(500).send(e.message)
+    console.error("error", e.message);
+  }
+}
 
 module.exports = {
   getAllCats,
   getCatById,
-  createCat,
+  addCat,
+  deleteCatById,
 };
