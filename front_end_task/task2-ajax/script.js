@@ -25,11 +25,17 @@ const renderResults = (data) => {
     results.innerHTML='';
     for(let i=0; i<data.length;i++){
         const resultText  =document.createElement('h3');
+        const genre=document.createElement('h4');
+        const summary=document.createElement('p');
         const img = document.createElement('img');
         img.src = data[i].show.image.medium;
-        resultText.textContent= "{"+data[i].show.name +"} can be watched on : "+ data[i].show.officialSite; 
+        resultText.textContent= ""+data[i].show.name +" can be watched on : "+ data[i].show.officialSite; 
+        genre.textContent="Genre : "+data[i].show.genres;  
+        summary.textContent="Summary: "+data[i].show.summary;      
         results.append(resultText);
         results.append(img);
+        results.append(genre);
+        results.append(summary);
     }
 };
 

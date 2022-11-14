@@ -1,3 +1,6 @@
+'use strict' ;
+
+
 const picArray = [
   {
     'title': 'Title 1',
@@ -58,3 +61,34 @@ const picArray = [
 ];
 
 // Put code of task C here
+
+function newArticle(){
+  const main=document.querySelector('main');
+  for (const i of picArray) {
+    const article = document.createElement('article');
+    const header = document.createElement('header');
+    const h2 = document.createElement('h2');
+    const figure = document.createElement('figure');
+    const image = document.createElement('img');
+    const figCaption = document.createElement('figcaption');
+    const paragraph = document.createElement('p');
+
+  
+    h2.textContent = i.title;
+    image.src=i.filename;
+    figCaption.textContent=i.caption;
+    paragraph.textContent=i.description;
+
+
+    header.appendChild(h2);
+    figure.appendChild(image);
+    figure.appendChild(figCaption);
+    article.appendChild(header);
+    article.appendChild(figure);
+    article.appendChild(paragraph);
+
+    main.appendChild(article);
+  }
+  
+}  
+newArticle();
