@@ -1,5 +1,6 @@
 'use strict';
 const userModel=require('../models/userModel');
+const{validationResult}=require('express-validator')
 
 
 const getUsers=async (req,res)=>{
@@ -25,13 +26,18 @@ const getUser=async (req,res)=>{
 const modifyUser=(req,res)=>{};
 
 const createUser=async (req,res)=>{
-    try{
-        console.log(req);
-        const userAdd= await userModel.addUser(res,req);
-        if(userAdd){
-        res.send ("User added");}
-    }catch(error){
-        res.sendStatus(404);
+    const newUser=req.body;
+    if (!newUser.role) {
+        newUser.role=1
+    }
+    const errors=validationResult(req);
+    
+    if(errors.isEmpty()){
+        const result=await userModel.addUser(newUser,res);
+        res.status(201).json({message:'user created',userId:result})
+
+    }else{
+        res.status(400).json({message:'Failed to create user',errors:errors.array()})
     }
 };
 const deleteUser= async (req,res)=>{

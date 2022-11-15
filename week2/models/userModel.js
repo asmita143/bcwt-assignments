@@ -23,12 +23,12 @@ const getUserById = async (id,res) => {
     console.error("error", e.message);
   }
 };
-const addUser = async (res,user) => {
+const addUser = async (user,res) => {
   try {
-    const values=[ user.body.name, user.body.email, user.body.passwd];
+    const values=[ user.name, user.email, user.passwd, user.role];
     console.log(values);
     const[result]= await promisePool.query("INSERT INTO wop_user(name,email,password) VALUE ( ?, ?, ?)", values );
-    return result;
+    return result.insertId;
   } catch (e) {
     res.status(501).send(e.message)
     console.error("error", e.message);
