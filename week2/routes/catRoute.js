@@ -28,8 +28,8 @@ router
     body("owner").isInt({ min: 1 }),
     catController.createCat
   )
-  .put("/", catController.modifyCat)
-  .put("/:catId", catController.modifyCat)
+  .put("/", catController.modifyCat)//TODO: ADD validators
+  .put("/:catId", catController.modifyCat)//TODO: ADD validators
   .delete("/:catId", catController.deleteCat);
 
 module.exports = router;
