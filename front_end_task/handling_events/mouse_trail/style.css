@@ -1,0 +1,30 @@
+body {
+	width: 100vh;
+	background-color: rgba(162, 124, 245, 0.581);
+}
+.trail {
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	border: 1px solid rgba(255, 0, 0, 0.8);
+	background: rgba(255, 0, 0, 0.8);
+	position: absolute;
+	animation: come 1s linear forwards;
+}
+@keyframes come {
+	0% {
+		transform: scale(0);
+	}
+	10% {
+		transform: scale(1) translateY(0px);
+		opacity: 1;
+	}
+	100% {
+		transform: scale(0) translateY(50px);
+		opacity: 0;
+	}
+}
+h1 {
+	color: #eee;
+}
+
