@@ -1,6 +1,7 @@
 'use strict';
 const express = require('express');
 const cookieParser=require('cookie-parser');
+const session=require('express-session')
 const app = express();
 const port = 3000;
 
@@ -15,6 +16,11 @@ app.set('view engine', 'pug');
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
+app.use(session({secret:
+  'hsdhsd64jjh663',
+  saveUninitialized:false,
+  resave:true,
+  cookie:{maxAge: 60000}}))
 
 
 app.get('/', (req, res) => {
@@ -24,7 +30,7 @@ app.get('/form', (req, res) => {
   res.render('form');
 });
 app.get('/secret', (req, res) => {
-  if (loggedIn) {
+  if (req.session.loggedIn) {
     res.render('secret');
   }else{
     res.redirect('/form')
@@ -32,14 +38,17 @@ app.get('/secret', (req, res) => {
 });
 app.post('/login', (req, res) => {
   //check for username/password match
-  console.log(req.body);
+  //console.log(req.session);
   if (req.body.username==user.username && req.body.password== user.password) {
-    loggedIn=true;
-    res.redirect('/secret');
+    req.session.loggedIn=true;
   }
-  
-  
+  res.redirect('/secret');
 });
+app.get('/logout',(req,res)=>{
+  req.session.loggedIn=false;
+  //res.clearCookie('connect.sid');//cookie for the session
+  res.redirect('/')
+})
 app.get('/getCookie', (req, res) => {
   console.log(req.cookies);
   res.send('color choice: '+ req.cookies.color);
