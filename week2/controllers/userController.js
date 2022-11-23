@@ -49,10 +49,15 @@ const deleteUser= async (req,res)=>{
         res.sendStatus(404);
     }
 };
+const checkToken=(req, res)=>{
+    res.json({user:req.user})
+};
+
 module.exports={
     getUsers,
     getUser,
     modifyUser,
     createUser,
     deleteUser,
+    checkToken,
 }
