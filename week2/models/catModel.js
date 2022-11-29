@@ -24,8 +24,8 @@ const getCatById = async (res,catId) => {
 };
 const addCat= async (cat,res)=>{
   try{
-    const values=[cat.name, cat.weight, cat.owner, cat.filename, cat.birthdate];
-    const [result] = await promisePool.query("INSERT INTO wop_cat VALUE (null,?,?,?,?,?)",values);
+    const values=[cat.name, cat.weight, cat.owner, cat.filename, cat.birthdate, cat.coords];
+    const [result] = await promisePool.query("INSERT INTO wop_cat VALUE (null,?,?,?,?,?,?)",values);
     return result.insertId;
   }catch(e){
     res.status(500).send(e.message);
