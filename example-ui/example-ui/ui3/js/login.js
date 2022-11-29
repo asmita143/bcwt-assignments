@@ -1,25 +1,25 @@
 'use strict';
-const url = 'http://localhost:3000'; // change url when uploading to server
+import {url} from "../../config.js";
 
 // select existing html elements
-const loginForm = document.querySelector('#login-form');
-const addUserForm = document.querySelector('#add-user-form');
+const loginForm = document.querySelector("#login-form");
+const addUserForm = document.querySelector("#add-user-form");
 
 // login
-loginForm.addEventListener('submit', async (evt) => {
+loginForm.addEventListener("submit", async (evt) => {
   evt.preventDefault();
   const data = serializeJson(loginForm);
   const fetchOptions = {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
   };
 
-  const response = await fetch(url + '/auth/login', fetchOptions);
+  const response = await fetch(url + "/auth/login", fetchOptions);
   const json = await response.json();
-  console.log('login response', json);
+  console.log("login response", json);
   if (!json.user) {
     alert(json.message);
   } else {
