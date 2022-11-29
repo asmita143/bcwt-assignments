@@ -6,8 +6,7 @@ const getCoordinates = (imgFile) => {
   // imgFile = full path to uploaded image
   return new Promise((resolve, reject) => {
     try {
-      // TODO: Use node-exif to get longitude and latitude from imgFile
-      // coordinates below should be an array of GPS coordinates in decimal format: [longitude, latitude]
+      
       resolve(coordinates);
     } catch (error) {
       reject(error);

@@ -26,8 +26,20 @@ router
     body("birthdate").isDate(),
     body("weight").isFloat({ min: 0.1, max: 30 }),
     catController.createCat)
-  .put("/", catController.modifyCat)//TODO: ADD validators
-  .put("/:catId", catController.modifyCat)//TODO: ADD validators
+    .put(
+      '/',
+      body('name').isLength({ min: 2 }).trim().escape(),
+      body('birthdate').isDate(),
+      body('weight').isFloat({ min: 0.1, max: 30 }),
+      catController.modifyCat
+    )
+    .put(
+      '/:catId',
+      body('name').isLength({ min: 2 }).trim().escape(),
+      body('birthdate').isDate(),
+      body('weight').isFloat({ min: 0.1, max: 30 }),
+      catController.modifyCat
+    )
   .delete("/:catId", catController.deleteCat);
 
 module.exports = router;
