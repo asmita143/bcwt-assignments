@@ -1,7 +1,7 @@
 "use strict";
 const catModel = require("../models/catModel");
 const { validationResult } = require("express-validator");
-const {makeThumbnail}=require("../utils/image");
+const {makeThumbnail,getCoordinates}=require("../utils/image");
 
 
 const getCats = async (req, res) => {
@@ -37,8 +37,9 @@ const createCat = async (req, res) => {
     res.status(400).json({ message: "file is missing or invalid" });
   } 
   else if (errors.isEmpty()) {
-    await makeThumbnail(req.file.path,req.file.filename);
     const cat = req.body;
+    await makeThumbnail(req.file.path,req.file.filename);
+    cat.coords = JSON.stringify(await getCoordinates(req.file.path));
     cat.owner=req.user.user_id;
     cat.filename = req.file.filename;
     const catId = await catModel.addCat(cat, res);
