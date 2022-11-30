@@ -1,6 +1,6 @@
 (async () => {
   'use strict';
-  const url = 'https://mybcwt.northeurope.cloudapp.azure.com'
+  const url = 'http://localhost:3000';
 
   // check sessionStorage
   if (!sessionStorage.getItem('token') || !sessionStorage.getItem('user')) {

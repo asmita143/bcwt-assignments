@@ -1,5 +1,5 @@
 'use strict';
-const url = 'https://mybcwt.northeurope.cloudapp.azure.com'
+const url = 'http://localhost:3000';
 // get query parameter
 const getQParam = (param) => {
   const queryString = window.location.search;

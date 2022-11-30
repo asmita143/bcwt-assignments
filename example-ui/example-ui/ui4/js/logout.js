@@ -1,5 +1,5 @@
 'use strict';
-const url = 'https://mybcwt.northeurope.cloudapp.azure.com'
+const url = 'http://localhost:3000';
 
 (async () => {
   try {

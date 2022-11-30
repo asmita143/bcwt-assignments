@@ -23,7 +23,7 @@ const modifyCat =async (req, res) => {
   if (req.params.catId) {
     cat.id = req.params.catId;
   }
-  const result = await catModel.updateCatById(cat, res);
+  const result = await catModel.updateCatById(cat, res, req.user.user_id);
   if (result.affectedRows > 0) {
     res.json({message: 'cat modified: ' + cat.id});
   } else {
